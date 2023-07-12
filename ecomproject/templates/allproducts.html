@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %} All Products {% endblock title %}
+
+{% block content %}
+
+<div class="container">
+    <h1>All Products</h1>
+    {% for cat in allcategories %}
+    <h4>{{ cat.title }}</h4>
+    <div class="row">
+{% for product in cat.product_set.all %}
+        <div class="col-md-4">
+            <div class="m-4">
+
+             <h3><a href="{% url 'ecomapp:productdetail' product.slug %}">{{ product.title }}</a></h3>
+<img src="{{ product.image.url }}" alt="{{ product.title }}" class="img-fluid" style="height: 2500; object-fit:cover;">
+
+            <p class="mt-3">Price: <strike>Rs. {{ product.marked_price}}</strike>{{ product.selling_price }}</p>
+            <a href="" class="btn btn-primary">Add To Cart</a>
+        </div>
+            </div>
+            {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}
